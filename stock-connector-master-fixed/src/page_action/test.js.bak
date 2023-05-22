@@ -1,0 +1,59 @@
+document.getElementById("test").addEventListener('click', () => {
+    console.log("Popup DOM fully loaded and parsed");
+
+    function modifyDOM() {
+        //You can play with your DOM here or check URL against your regex
+        //console.log('Tab script:');
+        //console.log(document.body);
+        //return document.body.innerHTML;
+		//alert(document.querySelector('#screener-content').innerHTML);
+		return document.querySelector('#screener-content table').outerHTML;
+    }
+
+    //We have permission to access the activeTab, so we can call chrome.tabs.executeScript:
+    chrome.tabs.executeScript({
+        code: '(' + modifyDOM + ')();' //argument here is a string but function.toString() returns function's code
+    }, (results) => {
+        //Here we have just the innerHTML and not DOM structure
+		//alert(results[0]);
+		//document.querySelector('#preview').innerHTML = results[0];
+
+
+		var area = document.createElement('div');
+		area.innerHTML = results[0];
+		var table = area.querySelector('table');
+		//document.querySelector('#preview').innerHTML = table.outerHTML;
+
+		var data = [];
+
+		
+
+		var rows = table.querySelectorAll('tr.table-dark-row-cp');
+		alert(rows.length);
+		//alert(table.rows.length);
+		for (var r = 0, row; row = rows[r]; r++) {
+		   //iterate through rows
+		   //rows would be accessed using the "row" variable assigned in the for loop
+		   var rowData = [];
+		   var cols = row.querySelectorAll('td');
+		   for (var c = 0; col = cols[c]; c++) {
+			 //iterate through columns
+			 //columns would be accessed using the "col" variable assigned in the for loop
+			 rowData.push(col.innerText);
+		   }  
+		   data.push(rowData.join('\t'));
+		   // √ ±‚»≠
+		}
+
+		// copy clipboard
+		var copyText = document.querySelector('#tsv');
+		copyText.value = data.join('\n');
+
+		copyText.select();
+		copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+		document.execCommand('copy');
+
+
+		});
+});
