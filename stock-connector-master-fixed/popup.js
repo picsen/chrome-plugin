@@ -130,3 +130,7 @@ chrome.tabs.query(
 		*/
 	}
 );
+
+document.addEventListener('DOMContentLoaded', function () {
+	//dumpBookmarks();
+  });

@@ -192,12 +192,20 @@ document.getElementById("ajax").addEventListener('click', () => {
 
 
 function removeAd() {
+	//alert("removeAd");
 	//You can play with your DOM here or check URL against your regex
 	//console.log('Tab script:');
 	//console.log(document.body);
 	//return document.body.innerHTML;
 	//alert(document.querySelector('#screener-content').innerHTML);
 	// Seeking Alpha
+
+	//document.querySelector("#content > div > div.d-h.Q-b8.Q-cp.Q-cs > div > article > div > div > div.gu-zG.gu-AH > div")
+
+	/*
+	if( document.querySelector('#content') != null ) {
+		alert(document.querySelector('#content').outerHTML);
+	}
 	
 	if( document.querySelector('#paywall') != null ) {
 		document.querySelector('#paywall').hidden = true;
@@ -227,15 +235,18 @@ function removeAd() {
 	} else {
 		document.body.removeChild(document.querySelector('#temporary'));
 	}
+	*/
 	
 	
 	// return document.querySelector('#paywall').outerHTML;
 }
 
 document.getElementById("removeAd").addEventListener('click', () => {
-    console.log("Popup DOM fully loaded and parsed");
+	console.log("Popup DOM fully loaded and parsed");
+	removeAd();
     //We have permission to access the activeTab, so we can call chrome.tabs.executeScript:
-    chrome.scripting.executeScript({
+    /*
+	chrome.scripting.executeScript({
 		target : {tabId : 111},
         //code: '(' + removeAd + ')();' //argument here is a string but function.toString() returns function's code
 		function: removeAd
@@ -244,4 +255,5 @@ document.getElementById("removeAd").addEventListener('click', () => {
 		//alert(results[0]);
 		//document.querySelector('#preview').innerHTML = results[0];	
 	});
+	*/
 });

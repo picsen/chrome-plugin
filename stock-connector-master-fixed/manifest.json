@@ -12,7 +12,7 @@
   "action": {
     "default_icon": "icons/stock19.png",
     "default_title": "Stock Connector fixed",
-    "default_popup": "src/page_action/page_action.html"
+    "default_popup": "popup.html"
   },
   "permissions": [
     "tabs",
@@ -20,21 +20,23 @@
     "scripting",
     "cookies",
     "declarativeContent",
+    "webNavigation",
     "storage"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },  
-"host_permissions": [
+  "host_permissions": [
     "https://finance.yahoo.com/quote/*",
     "https://www.macrotrends.net/stocks/charts/*",
     "https://seekingalpha.com/symbol/*",
     "https://www.morningstar.com/stocks/*",
+    "https://www.morningstar.com/news/*",
     "https://finviz.com/quote.ashx",
     "https://www.nasdaq.com/market-activity/stocks/*",
     "https://www.digrin.com/stocks/detail/*",
     "https://www.gurufocus.com/stock/*",
     "https://www.dividendinvestor.com/*",
     "https://www.tipranks.com/*"
-    ]
+  ],
+  "background": {
+    "service_worker": "background.js"  
+  }
 }
